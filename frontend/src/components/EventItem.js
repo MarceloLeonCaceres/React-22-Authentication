@@ -9,6 +9,7 @@ function EventItem({ event }) {
     const proceed = window.confirm('Are you sure?');
 
     if (proceed) {
+      console.log('Estoy en proceed desde EventItem.js');
       submit(null, { method: 'delete' });
     }
   }

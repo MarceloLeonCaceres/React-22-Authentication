@@ -11,7 +11,9 @@ const {
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  console.log(req.token);
+  console.log('en event.js, en get / , async...: req.url: ' + req.url);
+  console.log('en event.js, en get / , async...: req.baseUrl: ' + req.baseUrl);
+  console.log('en event.js, en get / , async...: req.token: ' + req.token);
   try {
     const events = await getAll();
     res.json({ events: events });
@@ -32,7 +34,7 @@ router.get('/:id', async (req, res, next) => {
 router.use(checkAuth);
 
 router.post('/', async (req, res, next) => {
-  console.log(req.token);
+  console.log('en event.js, en post / , async...: req.token: ' + req.token);
   const data = req.body;
 
   let errors = {};
@@ -105,6 +107,7 @@ router.patch('/:id', async (req, res, next) => {
 });
 
 router.delete('/:id', async (req, res, next) => {
+  console.log('en backend/events.js en router.delete, antes de remove(...)')
   try {
     await remove(req.params.id);
     res.json({ message: 'Event deleted.' });

@@ -8,7 +8,7 @@ function AuthenticationPage() {
 
 export default AuthenticationPage;
 
-export async function action({ request }) {
+export async function action({request}) {
   // aquí no estamos en un componente y no podemos usar useSearchParams
   const searchParams = new URL(request.url).searchParams;
   const mode = searchParams.get("mode") || "login";
@@ -39,6 +39,11 @@ export async function action({ request }) {
     throw json({ message: "Could not authenticate user." }, { status: 500 });
   }
 
-  // soon: manage that token
-  return redirect("/");
+  const resData = await response.json();
+  const token = resData.token;
+  console.log('token en Authentication.js: ' + token);
+
+  localStorage.setItem('token', token);
+
+  return redirect('/');
 }
